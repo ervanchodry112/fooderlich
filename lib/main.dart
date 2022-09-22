@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/Models/CardModel.dart';
 import 'fooderlich_theme.dart';
 import 'home.dart';
+import 'MyInheritedWidget.dart';
 
 void main() {
-  runApp(const Fooderlich());
+  runApp(MyInheritedWidget(
+    model: CardModel(isFavorite: false),
+    child: Fooderlich(),
+  ));
 }
 
 class Fooderlich extends StatelessWidget {
@@ -15,7 +20,7 @@ class Fooderlich extends StatelessWidget {
     return MaterialApp(
       title: 'Fooderlich',
       theme: theme,
-      home: const Home(),
+      home: Home(),
     );
   }
 }

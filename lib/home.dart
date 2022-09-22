@@ -4,7 +4,9 @@ import 'card2.dart';
 import 'card3.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  Home({
+    Key? key,
+  }) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -12,10 +14,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _selectedIndex = 0;
+  static bool isFavorited = false;
 
   static List<Widget> pages = <Widget>[
     const Card1(),
-    const Card2(),
+    Card2(
+      isFavorited: isFavorited,
+    ),
     const Card3(),
     Container(
       color: Colors.red,
@@ -48,13 +53,13 @@ class _HomeState extends State<Home> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: <BottomNavigationBarItem>[
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
               icon: Icon(Icons.card_giftcard), label: 'Card'),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
             label: 'Card2',
           ),
-          const BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(Icons.card_giftcard),
             label: 'Card3',
           ),

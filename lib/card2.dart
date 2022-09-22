@@ -3,7 +3,8 @@ import 'author_card.dart';
 import 'fooderlich_theme.dart';
 
 class Card2 extends StatelessWidget {
-  const Card2({Key? key}) : super(key: key);
+  bool isFavorited;
+  Card2({Key? key, required this.isFavorited}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -15,10 +16,11 @@ class Card2 extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: Column(
           children: [
-            const AuthorCard(
+            AuthorCard(
                 authorName: 'Mike Katz',
                 title: 'Smoothie Connoisseur',
-                imageProvider: AssetImage('assets/author_katz.jpeg')),
+                imageProvider: AssetImage('assets/author_katz.jpeg'),
+                isFavorited: this.isFavorited),
             Expanded(
               child: Stack(
                 children: [
