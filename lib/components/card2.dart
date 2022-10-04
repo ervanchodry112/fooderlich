@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'author_card.dart';
-import 'fooderlich_theme.dart';
+import '../fooderlich_theme.dart';
+import '../models/models.dart';
 
 class Card2 extends StatelessWidget {
   bool isFavorited;
