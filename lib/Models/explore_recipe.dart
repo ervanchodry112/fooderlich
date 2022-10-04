@@ -12,6 +12,7 @@ class ExploreRecipe {
   late String? title;
   late String? subtitle;
   late String? backgroundImage;
+  late String? backgroundImageSource;
   late String? message;
   late String? authorName;
   late String? role;
@@ -19,17 +20,18 @@ class ExploreRecipe {
   late int? durationInMinutes;
   late String? dietType;
   late int? calories;
-  late List<String>? tags;
+  late List<String> tags;
   late String? description;
   late String? source;
-  late List<Ingredients>? ingredients;
-  late List<Instruction>? instructions;
+  late List<Ingredients> ingredients;
+  late List<Instruction> instructions;
 
   ExploreRecipe(
       {this.cardType,
       this.title,
       this.subtitle,
       this.backgroundImage,
+      this.backgroundImageSource,
       this.message,
       this.authorName,
       this.role,
@@ -37,33 +39,39 @@ class ExploreRecipe {
       this.durationInMinutes,
       this.dietType,
       this.calories,
-      this.tags,
+      required this.tags,
       this.description,
       this.source,
-      this.ingredients,
-      this.instructions});
+      required this.ingredients,
+      required this.instructions});
 
-  factory ExploreRecipe.fromJson(Map<String, dynamic> json) {
-    return ExploreRecipe(
-        cardType: json['cardType'],
-        title: json['title'],
-        subtitle: json['subtitle'],
-        backgroundImage: json['backgroundImage'],
-        message: json['message'],
-        authorName: json['authorName'],
-        role: json['role'],
-        profileImage: json['profileImage'],
-        durationInMinutes: json['durationInMinutes'],
-        dietType: json['dietType'],
-        calories: json['calories'],
-        tags: json['tags'].cast<String>(),
-        description: json['description'],
-        source: json['source'],
-        ingredients: (json['ingredients'] as List)
-            .map((e) => Ingredients.fromJson(e))
-            .toList(),
-        instructions: (json['instructions'] as List)
-            .map((e) => Instruction.fromJson(e))
-            .toList());
+  ExploreRecipe.fromJson(Map<String, dynamic> json) {
+    cardType = json['cardType'];
+    title = json['title'];
+    subtitle = json['subtitle'];
+    backgroundImage = json['backgroundImage'];
+    backgroundImageSource = json['backgroundImageSource'];
+    message = json['message'];
+    authorName = json['authorName'];
+    role = json['role'];
+    profileImage = json['profileImage'];
+    durationInMinutes = json['durationInMinutes'];
+    dietType = json['dietType'];
+    calories = json['calories'];
+    tags = json['tags'].cast<String>();
+    description = json['description'];
+    source = json['source'];
+    if (json['ingredients'] != null) {
+      ingredients = <Ingredients>[];
+      json['ingredients'].forEach((v) {
+        ingredients.add(Ingredients.fromJson(v));
+      });
+    }
+    if (json['instructions'] != null) {
+      instructions = <Instruction>[];
+      json['instructions'].forEach((v) {
+        instructions.add(Instruction.fromJson(v));
+      });
+    }
   }
 }
