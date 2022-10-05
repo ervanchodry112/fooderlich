@@ -12,7 +12,7 @@ class MockFooderlichService {
   Future<List<ExploreRecipe>> _getTodayRecipes() async {
     await Future.delayed(const Duration(milliseconds: 1000));
     final dataString =
-        await _loadAsset('assets/sample_data/sample_explore_recipes.json');
+        await _loadAsset('sample_data/sample_explore_recipes.json');
     final Map<String, dynamic> json = jsonDecode(dataString);
 
     if (json['recipes'] != null) {
@@ -29,8 +29,7 @@ class MockFooderlichService {
   Future<List<Post>> _getFriendFeed() async {
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    final dataString =
-        await _loadAsset('assets/sample_data/sample_friends_feed.json');
+    final dataString = await _loadAsset('sample_data/sample_friends_feed.json');
 
     final Map<String, dynamic> json = jsonDecode(dataString);
 
@@ -48,8 +47,7 @@ class MockFooderlichService {
   Future<List<SimpleRecipe>> getRecipes() async {
     await Future.delayed(const Duration(milliseconds: 1000));
 
-    final dataString =
-        await _loadAsset('assets/sample_data/sample_recipes.json');
+    final dataString = await _loadAsset('sample_data/sample_recipes.json');
 
     final Map<String, dynamic> json = jsonDecode(dataString);
 

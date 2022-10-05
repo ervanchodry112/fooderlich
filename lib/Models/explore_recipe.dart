@@ -8,23 +8,23 @@ class RecipeCardType {
 }
 
 class ExploreRecipe {
-  late String? cardType;
-  late String? title;
-  late String? subtitle;
-  late String? backgroundImage;
-  late String? backgroundImageSource;
-  late String? message;
-  late String? authorName;
-  late String? role;
-  late String? profileImage;
-  late int? durationInMinutes;
-  late String? dietType;
-  late int? calories;
-  late List<String> tags;
-  late String? description;
-  late String? source;
-  late List<Ingredients> ingredients;
-  late List<Instruction> instructions;
+  String? cardType;
+  String? title;
+  String? subtitle;
+  String? backgroundImage;
+  String? backgroundImageSource;
+  String? message;
+  String? authorName;
+  String? role;
+  String? profileImage;
+  int? durationInMinutes;
+  String? dietType;
+  int? calories;
+  List<String>? tags;
+  String? description;
+  String? source;
+  List<Ingredients>? ingredients;
+  List<Instruction>? instructions;
 
   ExploreRecipe(
       {this.cardType,
@@ -39,11 +39,11 @@ class ExploreRecipe {
       this.durationInMinutes,
       this.dietType,
       this.calories,
-      required this.tags,
+      this.tags,
       this.description,
       this.source,
-      required this.ingredients,
-      required this.instructions});
+      this.ingredients,
+      this.instructions});
 
   ExploreRecipe.fromJson(Map<String, dynamic> json) {
     cardType = json['cardType'];
@@ -64,13 +64,13 @@ class ExploreRecipe {
     if (json['ingredients'] != null) {
       ingredients = <Ingredients>[];
       json['ingredients'].forEach((v) {
-        ingredients.add(Ingredients.fromJson(v));
+        ingredients?.add(Ingredients.fromJson(v));
       });
     }
     if (json['instructions'] != null) {
       instructions = <Instruction>[];
       json['instructions'].forEach((v) {
-        instructions.add(Instruction.fromJson(v));
+        instructions?.add(Instruction.fromJson(v));
       });
     }
   }
