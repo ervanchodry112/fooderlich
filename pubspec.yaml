@@ -32,6 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^3.0.1
+  provider: ^5.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -100,6 +101,7 @@ flutter:
     - assets/profile_pics/person_sandra.jpeg
     - assets/profile_pics/person_stef.jpeg
     - assets/profile_pics/person_tiffani.jpeg
+    - assets/fooderlich_asssets/empty_list.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
