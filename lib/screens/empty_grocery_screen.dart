@@ -15,7 +15,7 @@ class EmptyGroceryScreen extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: 1 / 1,
-              child: Image.asset('/fooderlich_asssets/empty_list.png'),
+              child: Image.asset('fooderlich_asssets/empty_list.png'),
             ),
             const SizedBox(
               height: 8.0,

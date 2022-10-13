@@ -61,7 +61,6 @@ class GroceryListScreen extends StatelessWidget {
             ),
           );
         },
-        // 8
         separatorBuilder: (context, index) {
           return const SizedBox(height: 16.0);
         },

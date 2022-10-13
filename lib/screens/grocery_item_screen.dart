@@ -8,15 +8,12 @@ import '../components/grocery_tile.dart';
 
 class GroceryItemScreen extends StatefulWidget {
   final Function(GroceryItem)? onCreate;
-  final Function(GroceryItem) onUpdate;
+  final Function(GroceryItem)? onUpdate;
   late GroceryItem? originalItem;
   final bool isUpdating;
 
   GroceryItemScreen(
-      {Key? key,
-      required this.onCreate,
-      required this.onUpdate,
-      this.originalItem})
+      {Key? key, required this.onCreate, this.onUpdate, this.originalItem})
       : isUpdating = (originalItem != null),
         super(key: key);
 
@@ -76,16 +73,16 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
                 color: _currentColor,
                 quantity: _currentSliderValue,
                 date: DateTime(
-                  _dueDate!.year,
-                  _dueDate!.month,
-                  _dueDate!.day,
-                  _timeOfDay!.hour,
-                  _timeOfDay!.minute,
+                  _dueDate.year,
+                  _dueDate.month,
+                  _dueDate.day,
+                  _timeOfDay.hour,
+                  _timeOfDay.minute,
                 ),
               );
 
               if (widget.isUpdating) {
-                widget.onUpdate(groceryItem);
+                widget.onUpdate!(groceryItem);
               } else {
                 widget.onCreate!(groceryItem);
               }
@@ -93,6 +90,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
           )
         ],
         elevation: 0.0,
+        centerTitle: true,
         title: Text(
           'Grocery Item',
           style: GoogleFonts.lato(fontWeight: FontWeight.w600),

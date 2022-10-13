@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
       builder: (context, tabManager, child) {
         return Scaffold(
             appBar: AppBar(
+                centerTitle: true,
                 title: Text('Fooderlich',
                     style: Theme.of(context).textTheme.headline6)),
             body: IndexedStack(index: tabManager.selectedTab, children: pages),
@@ -43,6 +44,7 @@ class _HomeState extends State<Home> {
                 onTap: (index) {
                   tabManager.goToTab(index);
                 },
+                // ignore: prefer_const_literals_to_create_immutables
                 items: <BottomNavigationBarItem>[
                   const BottomNavigationBarItem(
                       icon: Icon(Icons.home), label: 'Card'),
