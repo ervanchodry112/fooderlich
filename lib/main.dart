@@ -55,7 +55,7 @@ class FooderlichState extends State<Fooderlich> {
           }
 
           final router = _appRouter.router;
-          
+
           return MaterialApp.router(
             theme: theme,
             title: 'Fooderlich',
