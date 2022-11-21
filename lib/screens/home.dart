@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'explore_screen.dart';
 import 'grocery_screen.dart';
@@ -20,11 +21,35 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  int _selectedIndex = 0;
+  static const String prefSelectedIndexKey = 'selectedIndex';
+
   static List<Widget> pages = <Widget>[
     ExploreScreen(),
     RecipesScreen(),
     const GroceryScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrentIndex();
+  }
+
+  void getCurrentIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.containsKey(prefSelectedIndexKey)) {
+      setState(() {
+        final index = prefs.getInt(prefSelectedIndexKey);
+        _selectedIndex = index ?? 0;
+      });
+    }
+  }
+
+  void saveCurrentIndex() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt(prefSelectedIndexKey, _selectedIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +72,12 @@ class HomeState extends State<Home> {
           bottomNavigationBar: BottomNavigationBar(
             selectedItemColor:
                 Theme.of(context).textSelectionTheme.selectionColor,
-            currentIndex: widget.currentTab,
+            currentIndex: _selectedIndex,
             onTap: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+              saveCurrentIndex();
               Provider.of<AppStateManager>(context, listen: false)
                   .goToTab(index);
               GoRouter.of(context).go('/$index');
