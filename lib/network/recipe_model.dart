@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'recipe_model.g.dart';
 
 @JsonSerializable()
@@ -8,7 +8,7 @@ class APIRecipeQuery {
       _$APIRecipeQueryFromJson(json);
 
   Map<String, dynamic> toJson() => _$APIRecipeQueryToJson(this);
-  @JsonKey(name: 'q') 
+  @JsonKey(name: 'q')
   String query;
   int from;
   int to;
@@ -16,23 +16,23 @@ class APIRecipeQuery {
   int count;
   List<APIHits> hits;
 
-  APIRecipeQuery({
-    required this.query,
-    required this.from,
-    required this.to,
-    required this.more,
-    required this.count,
-    required this.hits,
-  });
+  APIRecipeQuery(
+    this.query,
+    this.from,
+    this.to,
+    this.more,
+    this.count,
+    this.hits,
+  );
 }
 
 @JsonSerializable()
 class APIHits {
   APIRecipe recipe;
 
-  APIHits({
-    required this.recipe,
-  });
+  APIHits(
+    this.recipe,
+  );
 
   factory APIHits.fromJson(Map<String, dynamic> json) =>
       _$APIHitsFromJson(json);
@@ -50,15 +50,15 @@ class APIRecipe {
   double totalWeight;
   double totalTime;
 
-  APIRecipe({
-    required this.label,
-    required this.image,
-    required this.url,
-    required this.ingredients,
-    required this.calories,
-    required this.totalWeight,
-    required this.totalTime,
-  });
+  APIRecipe(
+    this.label,
+    this.image,
+    this.url,
+    this.ingredients,
+    this.calories,
+    this.totalWeight,
+    this.totalTime,
+  );
 
   factory APIRecipe.fromJson(Map<String, dynamic> json) =>
       _$APIRecipeFromJson(json);
@@ -86,10 +86,10 @@ class APIIngredients {
   String name;
   double weight;
 
-  APIIngredients({
-    required this.name,
-    required this.weight,
-  });
+  APIIngredients(
+    this.name,
+    this.weight,
+  );
 
   factory APIIngredients.fromJson(Map<String, dynamic> json) =>
       _$APIIngredientsFromJson(json);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/api/get_recipes.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,6 +35,8 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     getCurrentIndex();
+    // print("Halo saya berhasil di print");
+    GetRecipes.getRecipes();
   }
 
   void getCurrentIndex() async {
@@ -41,7 +44,9 @@ class HomeState extends State<Home> {
     if (prefs.containsKey(prefSelectedIndexKey)) {
       setState(() {
         final index = prefs.getInt(prefSelectedIndexKey);
-        _selectedIndex = index ?? 0;
+        if (index != null) {
+          _selectedIndex = index;
+        }
       });
     }
   }
@@ -66,7 +71,7 @@ class HomeState extends State<Home> {
             ],
           ),
           body: IndexedStack(
-            index: widget.currentTab,
+            index: _selectedIndex,
             children: pages,
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -74,10 +79,12 @@ class HomeState extends State<Home> {
                 Theme.of(context).textSelectionTheme.selectionColor,
             currentIndex: _selectedIndex,
             onTap: (index) {
+              print('Halo saya berhasil di print');
               setState(() {
                 _selectedIndex = index;
               });
               saveCurrentIndex();
+
               Provider.of<AppStateManager>(context, listen: false)
                   .goToTab(index);
               GoRouter.of(context).go('/$index');
