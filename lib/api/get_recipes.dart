@@ -10,7 +10,6 @@ class GetRecipes {
     if (response.statusCode == 200) {
       final Map<String, dynamic> json = convert.jsonDecode(response.body);
       print(response.body);
-
       if (json['recipes'] != null) {
         final recipes = <SimpleRecipe>[];
         json['recipes'].foreach((v) {
