@@ -79,7 +79,7 @@ class HomeState extends State<Home> {
                 Theme.of(context).textSelectionTheme.selectionColor,
             currentIndex: _selectedIndex,
             onTap: (index) {
-              print('Halo saya berhasil di print');
+              // print('Halo saya berhasil di print');
               setState(() {
                 _selectedIndex = index;
               });
