@@ -21,20 +21,26 @@ class RecipeThumbnail extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Image.network(
-                recipe.dishImage,
+                recipe.dishImage!,
                 fit: BoxFit.cover,
               ),
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            recipe.title,
+            recipe.title!,
             maxLines: 1,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Text(
-            recipe.duration,
+            recipe.duration!,
             style: Theme.of(context).textTheme.bodyText1,
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.favorite_border),
+            color: Colors.red,
+            alignment: Alignment.topRight,
           ),
         ],
       ),
