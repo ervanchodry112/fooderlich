@@ -55,13 +55,47 @@ class DBProvider {
     return res;
   }
 
-  Future<int> delResep(String id) async {
+  Future<int> delResep(String id_recipe) async {
     final dbClient = await database;
     final res = await dbClient!.delete(
       tableName,
       where: '$id = ?',
-      whereArgs: [id],
+      whereArgs: [id_recipe],
     );
     return res;
+  }
+
+  // Create get resep by id
+  Future<bool> getResepByID(String id_recipe) async {
+    final dbClient = await database;
+    final res = await dbClient!.query(
+      tableName,
+      where: '$id = ?',
+      whereArgs: [id_recipe],
+    );
+
+    return res.isNotEmpty ? true : false;
+  }
+
+  // Create get all resep
+  Future<List<SimpleRecipe>> getAllResep() async {
+    final dbClient = await database;
+    final res = await dbClient!.query(tableName);
+
+    var recipes = <SimpleRecipe>[];
+    if (recipes != null) {
+      recipes = parseResep(res);
+    }
+    return recipes;
+  }
+
+  List<SimpleRecipe> parseResep(List<Map<String, dynamic>> res) {
+    final recipes = <SimpleRecipe>[];
+    for (final recipeMap in res) {
+      final recipe = SimpleRecipe.fromJson(recipeMap);
+      recipes.add(recipe);
+    }
+
+    return recipes;
   }
 }

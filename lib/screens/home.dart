@@ -69,6 +69,12 @@ class HomeState extends State<Home> {
               style: Theme.of(context).textTheme.headline6,
             ),
             actions: [
+              IconButton(
+                icon: const Icon(Icons.favorite_border),
+                onPressed: () {
+                  GoRouter.of(context).go('/${_selectedIndex}/favorites');
+                },
+              ),
               profileButton(widget.currentTab),
             ],
           ),

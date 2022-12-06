@@ -20,6 +20,18 @@ class RecipeThumbnail extends StatefulWidget {
 class RecipeThumbnailState extends State<RecipeThumbnail> {
   bool _isFavorited = false;
 
+  void initState() {
+    super.initState();
+    loadFavorite();
+  }
+
+  void loadFavorite() async {
+    _isFavorited = await DBProvider.db.getResepByID(widget.recipe.id);
+    setState(() {
+      print('Favorit ${widget.recipe.title} $_isFavorited');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,8 +59,7 @@ class RecipeThumbnailState extends State<RecipeThumbnail> {
                         onPressed: () {
                           if (!_isFavorited) {
                             DBProvider.db.addResep(widget.recipe);
-                          }
-                          if (_isFavorited) {
+                          }else if (_isFavorited) {
                             DBProvider.db.delResep(widget.recipe.id);
                           }
                           setState(() {

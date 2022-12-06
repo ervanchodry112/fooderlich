@@ -38,12 +38,7 @@ class EmptyGroceryScreen extends StatelessWidget {
               ),
               color: Colors.green,
               onPressed: () {
-                GoRouter.of(context).goNamed(
-                  'home',
-                  params: {
-                    'tab': '${FooderlichTab.recipes}',
-                  },
-                );
+                GoRouter.of(context).go('/${FooderlichTab.recipes}');
                 Provider.of<AppStateManager>(context, listen: false)
                     .goToRecipes();
               },

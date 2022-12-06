@@ -2,6 +2,7 @@ import 'package:fooderlich/models/models.dart';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../screens/favorite_screen.dart';
 import '../screens/screens.dart';
 
 class AppRouter {
@@ -36,6 +37,12 @@ class AppRouter {
             return Home(key: state.pageKey, currentTab: tab);
           },
           routes: [
+            GoRoute(
+                name: 'favorites',
+                path: 'favorites',
+                builder: (BuildContext context, GoRouterState state) {
+                  return const FavoriteScreen();
+                }),
             GoRoute(
               name: 'item',
               path: 'item/:id',
