@@ -36,7 +36,7 @@ class SimpleRecipeDB {
     map['title'] = title;
     map['duration'] = duration;
     map['source'] = source;
-    map['information'] = information;
+    map['information'] = information.toString();
 
     return map;
   }

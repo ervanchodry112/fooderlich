@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/db/db_provider.dart';
 
 import '../models/models.dart';
 
-class RecipeThumbnail extends StatelessWidget {
+class RecipeThumbnail extends StatefulWidget {
   final SimpleRecipe recipe;
 
   const RecipeThumbnail({
     super.key,
     required this.recipe,
   });
+
+  @override
+  RecipeThumbnailState createState() {
+    return RecipeThumbnailState();
+  }
+}
+
+class RecipeThumbnailState extends State<RecipeThumbnail> {
+  bool _isFavorited = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,29 +28,51 @@ class RecipeThumbnail extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Image.network(
-                recipe.dishImage!,
-                fit: BoxFit.cover,
-              ),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    widget.recipe.dishImage,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Positioned(
+                  right: 5,
+                  top: 5,
+                  child: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.white,
+                      child: IconButton(
+                        onPressed: () {
+                          if (!_isFavorited) {
+                            DBProvider.db.addResep(widget.recipe);
+                          }
+                          if (_isFavorited) {
+                            DBProvider.db.delResep(widget.recipe.id);
+                          }
+                          setState(() {
+                            _isFavorited = !_isFavorited;
+                          });
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          color: _isFavorited ? Colors.red : Colors.grey,
+                        ),
+                      )),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 10),
           Text(
-            recipe.title!,
+            widget.recipe.title!,
             maxLines: 1,
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Text(
-            recipe.duration!,
+            widget.recipe.duration!,
             style: Theme.of(context).textTheme.bodyText1,
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.favorite_border),
-            color: Colors.red,
-            alignment: Alignment.topRight,
           ),
         ],
       ),

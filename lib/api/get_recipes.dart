@@ -19,7 +19,6 @@ class GetRecipes {
       if (json['recipes'] != null) {
         final recipes = <SimpleRecipe>[];
         json['recipes'].forEach((v) {
-          print(v);
           recipes.add(SimpleRecipe.fromJson(v));
         });
         return recipes;

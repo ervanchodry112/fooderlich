@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/api/get_recipes.dart';
+import 'package:fooderlich/db/db_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -35,6 +36,7 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     getCurrentIndex();
+    DBProvider.db.database;
     // print("Halo saya berhasil di print");
     GetRecipes.getRecipes();
   }
