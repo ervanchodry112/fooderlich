@@ -1,10 +1,12 @@
+import 'dart:convert';
+
 class SimpleRecipe {
   String id;
   String dishImage;
   String title;
   String duration;
   String source;
-  List<String> information;
+  List<String>? information;
 
   SimpleRecipe({
     required this.id,
@@ -12,7 +14,7 @@ class SimpleRecipe {
     required this.title,
     required this.duration,
     required this.source,
-    required this.information,
+    this.information,
   });
 
   factory SimpleRecipe.fromJson(Map<String, dynamic> json) {
@@ -37,5 +39,15 @@ class SimpleRecipe {
     map['information'] = information.toString();
 
     return map;
+  }
+
+  factory SimpleRecipe.fromMap(Map<String, dynamic> map) {
+    return SimpleRecipe(
+      id: map['id'] as String,
+      dishImage: map['dishImage'] as String,
+      title: map['title'] as String,
+      duration: map['duration'] as String,
+      source: map['source'] as String,
+    );
   }
 }

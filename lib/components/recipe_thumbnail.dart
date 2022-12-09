@@ -59,7 +59,7 @@ class RecipeThumbnailState extends State<RecipeThumbnail> {
                         onPressed: () {
                           if (!_isFavorited) {
                             DBProvider.db.addResep(widget.recipe);
-                          }else if (_isFavorited) {
+                          } else if (_isFavorited) {
                             DBProvider.db.delResep(widget.recipe.id);
                           }
                           setState(() {

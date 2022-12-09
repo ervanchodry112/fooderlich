@@ -15,18 +15,24 @@ class FavoriteScreen extends StatefulWidget {
 class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // future: exploreService.getRecipes(),
-      future: DBProvider.db.getAllResep(),
-      builder: (context, AsyncSnapshot<List<SimpleRecipe>> snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return RecipesGridView(recipes: snapshot.data ?? []);
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Favorite Recipes"),
+        centerTitle: true,
+      ),
+      body: FutureBuilder(
+        future: DBProvider.db.getAllResep(),
+        builder: (context, AsyncSnapshot<List<SimpleRecipe>> snapshot) {
+          print(snapshot);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return RecipesGridView(recipes: snapshot.data ?? []);
+          }
+        },
+      ),
     );
   }
 }

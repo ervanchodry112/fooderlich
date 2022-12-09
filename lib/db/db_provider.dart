@@ -4,7 +4,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sqflite/sqlite_api.dart';
 import 'package:path/path.dart';
 
-import '../models/simple_recipe_db.dart';
 import '../models/simple_recipe.dart';
 
 class DBProvider {
@@ -83,8 +82,9 @@ class DBProvider {
     final res = await dbClient!.query(tableName);
 
     var recipes = <SimpleRecipe>[];
-    if (recipes != null) {
+    if (res.isNotEmpty) {
       recipes = parseResep(res);
+      print(recipes);
     }
     return recipes;
   }
@@ -92,7 +92,7 @@ class DBProvider {
   List<SimpleRecipe> parseResep(List<Map<String, dynamic>> res) {
     final recipes = <SimpleRecipe>[];
     for (final recipeMap in res) {
-      final recipe = SimpleRecipe.fromJson(recipeMap);
+      final recipe = SimpleRecipe.fromMap(recipeMap);
       recipes.add(recipe);
     }
 
